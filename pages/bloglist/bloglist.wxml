@@ -1,0 +1,12 @@
+<!--pages/bloglist/bloglist.wxml-->
+
+
+<view>
+  <view class='title'>文章列表</view>
+  <block wx:for="{{blogList}}" wx:for-item="item" wx:key="{{index}}">
+  <view bindtap='gofn' id="{{item.id}}">
+   <text class="log-item">{{index + 1}}. {{item.article_name}}</text>
+  </view>
+   
+  </block>
+</view>

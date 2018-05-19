@@ -1,0 +1,36 @@
+<import src="../../tool/wxParse/wxParse.wxml"/>
+
+<view class="mpage {{!ui.tStart? 'withAnimate': ''}}" style="left:{{ui.offsetLeft}}px;width: {{ui.windowWidth}}px" bindtouchstart="handlerStart" catchtouchmove="handlerMove" bindtouchcancel="handlerCancel" bindtouchend="handlerEnd" bindtap="handlerPageTap">
+  <scroll-view bindscroll="handlerScroll" scroll-y style="height: 100%;">
+      <view class='breadcast'>
+        <text wx:for="{{breadcast}}" wx:for-item="item" data-item="{{item}}" bindtap='filterArticle' wx:key="{{index}}">{{item.name}}></text>
+      </view>
+      <view wx:if="{{contentType=='list'}}">
+          <view wx:for="{{showArticleData}}" wx:for-item="item" data-item="{{item}}" wx:key="{{index}}" class="articleList" bindtap='goDetail'>
+              <text>{{item.article_name}}</text>-
+              <text>{{item.editer}}</text>
+              <text>{{item.time}}</text>
+          </view>
+      </view>
+      <view wx:else>
+          <view class="articleContent">
+              <template is="wxParse" data="{{wxParseData:content.nodes}}"/>
+          </view>
+      </view>
+  </scroll-view>
+</view>
+<view bindtouchstart="handlerStart" catchtouchmove="handlerMove" bindtouchcancel="handlerCancel" bindtouchend="handlerEnd" class="user" style="width: {{ui.menuWidth}}px">
+   <view style="width: {{ui.menuWidth}}px;left:{{-ui.menuWidth/3 + ui.offsetLeft/3}}px" class="user-box {{!ui.tStart? 'withAnimate': ''}}">
+     <view wx:for="{{navList}}" wx:for-item="item" wx:key="{{index}}" class="one-menu" bindtap='goshow' data-oneid="{{item.onedata.id}}">
+        <view>
+           <view class="oneClassTitle"> {{item.onedata.cnname}}</view>
+          
+             <view wx:for="{{item.twodata}}" wx:for-item="items" wx:key="{{index}}" class="one-menu two-menu" wx:if="{{item.onedata.id==twoClassShow}}" id="{{items.id}}" bindtap='gohide'>
+                <view>
+                    {{items.cnname}}
+                </view>
+            </view>
+        </view>
+     </view>
+   </view>
+</view>

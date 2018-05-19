@@ -1,0 +1,6 @@
+/* pages/bloglist/bloglist.wxss */
+.title{
+  text-align: center;
+  margin:50px auto;
+  font-size: 60rpx;
+}
